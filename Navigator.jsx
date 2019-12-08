@@ -7,21 +7,21 @@ export const stackNavigator = createStackNavigator({
     Auth: {
         screen: AuthScreen,
         navigationOptions: () => ({
-            title: `EatWas - Authentification`,
+            title: `Projet EatWas`,
         }),
     },
 
     Home: {
         screen: HomeScreen,
         navigationOptions: () => ({
-            title: `EatWas - Tableau de bord`,
+            title: `Projet EatWas`,
         }),
     },
 
     Register: {
         screen: Register,
         navigationOptions: () => ({
-            title: `EatWas - M'inscrire`,
+            title: `Projet EatWas`,
         }),
     },
 });
