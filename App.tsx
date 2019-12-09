@@ -1,5 +1,5 @@
 import React from 'react';
-import { ApplicationProvider, IconRegistry, Icon, TopNavigation, TopNavigationAction } from "@ui-kitten/components";
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import { mapping, light as lightTheme } from '@eva-design/eva';
 import { EvaIconsPack } from "@ui-kitten/eva-icons"
 import {stackNavigator} from './Navigator';
