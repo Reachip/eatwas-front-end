@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {Component} from "react";
 import {Layout, Text, Input, Button, ButtonGroup} from "@ui-kitten/components"
 import {StyleSheet, TouchableOpacity} from "react-native"
@@ -36,7 +36,7 @@ export default class AuthScreen extends Component<Props, State> {
         super(props)
         this.state = {
             username: "",
-            password: ""
+            password: "",
         }
     }
 
@@ -54,7 +54,7 @@ export default class AuthScreen extends Component<Props, State> {
                 </Input>
                 <Input 
                     style={styles.input} 
-                    status="success" 
+                    status="success"
                     placeholder="Mot de passe" 
                     secureTextEntry={true} 
                     onChangeText={pwd => this.setState({password: pwd})}>    
