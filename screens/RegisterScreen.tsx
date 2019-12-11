@@ -27,7 +27,7 @@ interface Props {}
 
 interface State {
     date: Date,
-    selectedIndex: Number,
+    selectedIndex: number,
     inputStatus: String,
     regime: null,
     sex: null
