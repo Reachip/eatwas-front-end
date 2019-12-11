@@ -6,6 +6,7 @@ npm-debug.*
 *.p12
 *.key
 *.mobileprovision
+.vscode/
 *.orig.*
 web-build/
 web-report/
