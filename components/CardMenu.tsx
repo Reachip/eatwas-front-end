@@ -23,11 +23,12 @@ const styles = StyleSheet.create({
 interface Props {
     title: String,
     imageUrl: String
+    switchTo: Function
 }
 
 const CardMenu: React.FC<Props> = (props: Props) => {
     return (
-        <TouchableOpacity style={styles.image}>
+        <TouchableOpacity style={styles.image} onPress={() => props.switchTo()}>
             <ImageBackground
                 source={{uri: props.imageUrl}} 
                 imageStyle={{borderRadius: 10}}
