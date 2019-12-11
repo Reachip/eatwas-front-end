@@ -6,6 +6,7 @@ import ProfilScreen from "./screens/ProfilScreen"
 import SuggestionScreen from "./screens/SuggestionScreen"
 import BraceletScreen from "./screens/BraceletScreen"
 
+// eslint-disable-next-line import/prefer-default-export
 export const stackNavigator = createStackNavigator({
     Auth: {
         screen: AuthScreen,
