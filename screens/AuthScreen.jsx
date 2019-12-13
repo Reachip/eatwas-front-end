@@ -4,7 +4,8 @@
 /* eslint-disable react/no-unused-state */
 import React, {Component} from "react"
 import {Layout, Text, Input, Button, ButtonGroup} from "@ui-kitten/components"
-import {StyleSheet, TouchableOpacity} from "react-native"
+import {StyleSheet, TouchableOpacity, Alert, AsyncStorage} from "react-native"
+import APISession from "../api/apisession"
 
 const styles = StyleSheet.create({
     layout: {
@@ -52,14 +53,27 @@ export default class AuthScreen extends Component {
                     style={styles.input} 
                     status="success"
                     placeholder="Mot de passe" 
-                    secureTextEntry 
+                    secureTextEntry
                     onChangeText={password => this.setState({password})} />
                 <TouchableOpacity style={{marginTop: 5}}>
                     <Text category="s2">>> J'ai oublié mon mot de passe</Text>
                 </TouchableOpacity>
                 <ButtonGroup style={styles.buttonGroup} status="success" size="large">
                     <Button onPress={() => {
-                        navigate("Home")
+                        const s = new APISession("http://192.168.10.101:8080")
+                        s.authentificate(this.state.username, this.state.password)
+                            .then(response => {
+                                if (response.code === 401) {
+                                    Alert.alert("Authentification", response.message)
+                                }
+                                    
+                                
+                                else {
+                                    AsyncStorage.setItem("token", response.message)
+                                    navigate("Home")
+                                }
+                            })
+                            .catch(() => Alert.alert("Erreur interne", "Une erreur a été détecté sur notre service"))
                     }}>Me connecter</Button>
                     <Button onPress={() => navigate("Register")}>M'inscrire</Button>
                 </ButtonGroup>
