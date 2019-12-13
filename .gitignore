@@ -1,5 +1,6 @@
 node_modules/**/*
 .expo/*
+.expo/
 npm-debug.*
 *.jks
 *.p8
@@ -7,10 +8,16 @@ npm-debug.*
 *.key
 *.mobileprovision
 .vscode/
+ios/
+ct/
+android/
+.expo-shared/
 *.orig.*
 web-build/
 web-report/
 .expo-shared/
 package-lock.json
+yarn.lock
+yarn-error.log
 # macOS
 .DS_Store
