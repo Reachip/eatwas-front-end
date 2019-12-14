@@ -2,8 +2,10 @@
 /* eslint-disable react/destructuring-assignment */
 import React, {Component} from "react"
 
-import {Layout, Text, Input, Radio, RadioGroup, Select, Button} from "@ui-kitten/components"
-import {StyleSheet, ScrollView} from "react-native"
+import {Layout, Text, Input, Radio, RadioGroup, Select, Button, Spinner} from "@ui-kitten/components"
+import {StyleSheet, ScrollView, Alert} from "react-native"
+
+import APISession from "../api/apisession"
 
 const styles = StyleSheet.create({
     layout: {
@@ -29,46 +31,43 @@ export default class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedIndex: 0,
-            regime: null,
-            sex: null
+            username: "",
+            password: "",
+            goal: null,
+            sex: null,
+            sportFrequency: null
         }
     }
 
-    onCheckedChange(index) {
-        this.setState({selectedIndex: index})
+    onGoalChange(index) {
+        this.setState({goal: index})
+    }
+
+    onSportFrequencyChange(index) {
+        this.setState({sportFrequency: index})
     }
 
     render() {
+        const {navigate} = this.props.navigation
         return( 
             <Layout style={styles.layout}>
                 <ScrollView>
                     <Text category="h3" style={styles.title}>M'inscrire au projet EatWas</Text>
                     <Text style={{marginBottom: 10, marginTop: 35}} category="s1">Comment dois-on vous appeler ?</Text>
-                    <Input placeholder="Exemple : Rached Mejri" />
+                    <Input placeholder="Exemple : Claude François" onChangeText={(username) => this.setState({username})} />
                     <Text style={{marginBottom: 10, marginTop: 35}} category="s1">Quel sera votre mot de passe ?</Text>
-                    <Input placeholder="Votre mot de passe" secureTextEntry />
+                    <Input placeholder="Votre mot de passe" onChangeText={(password) => this.setState({password})} secureTextEntry />
                     <Text style={{marginBottom: 10, marginTop: 25}} category="s1">Quelle  est votre date de naissance ?</Text>
-                    
+                    <Input placeholder="Par exemple : 12/10/2001" />
                     <Text style={{marginBottom: 10, marginTop: 25}} category="s1">A propos de vos dépenses dans la journée :</Text>
                     <RadioGroup
-                        selectedIndex={this.state.selectedIndex}
-                        onChange={(i) => this.onCheckedChange(i)}
+                        selectedIndex={this.state.sportFrequency}
+                        onChange={(option) => this.onSportFrequencyChange(option)}
                     >
                         <Radio style={styles.radio} text="Je fais peu d'exercice"/>
                         <Radio style={styles.radio} text="Je fais de l'exercie (je marche, je travail debout ..)"/>
                         <Radio style={styles.radio} text="Je suis sportif, je fais beaucoup d'exercice"/>
-                    </RadioGroup>
-                    <Text style={{marginBottom: 10, marginTop: 25}} category="s1">Vous suivez un régime :</Text>
-                    <Select
-                        data={[{text: "Vegan"}, {text: "Neutre (aucun régime)"}, {text: "Végétalien"}]}
-                        selectedOption={this.state.regime}
-                        placeholder="Sélectionnez un régime"
-                        onSelect={(option) => {
-                            this.setState({regime: option})
-                        }}
-                    />
-
+                    </RadioGroup> 
                     <Text style={{marginBottom: 10, marginTop: 25}} category="s1">Votre êtes de sexe :</Text>
                     <Select
                         data={[{text: "Maculin"}, {text: "Féminin"}]}
@@ -80,11 +79,10 @@ export default class Register extends Component {
                     />
                     <Text style={{marginBottom: 10, marginTop: 25}} category="s1">A propos de votre objectif :</Text>
                     <RadioGroup
-                        selectedIndex={this.state.selectedIndex}
-                        onChange={(i) => this.onCheckedChange(i)}
+                        selectedIndex={this.state.goal}
+                        onChange={(goal) => this.onGoalChange(goal)}
                     >
                         <Radio style={styles.radio} text="J'aimerais perdre du poid"/>
-                        <Radio style={styles.radio} text="J'aimerais prendre du poid"/>
                         <Radio style={styles.radio} text="J'aimerais prendre de la masse musculaire"/>
                         <Radio style={styles.radio} text="J'aimerais manger plus sainement"/>
                         <Radio style={styles.radio} text="Aucun en particulier"/>
@@ -92,6 +90,30 @@ export default class Register extends Component {
                     <Button 
                         status="success" 
                         style={styles.button}
+                        onPress={() => {
+                            const session = new APISession("http://192.168.1.90:8080", this.state.username, this.state.password)
+                            session.register(this.state.sex.text, this.state.sportFrequency, this.state.goal, 0, "r.mejri")
+                                .then(resp => {
+                                    switch (resp.code) {
+                                        case 200:
+                                            Alert.alert("Inscription", resp.message)
+                                            navigate("Auth")
+                                            break
+
+                                        case 500:
+                                            Alert.alert("Erreur", resp.message)
+                                            break
+
+                                        case 401:
+                                            Alert.alert("Erreur", resp.message)
+                                            break
+
+                                        default:
+                                            break
+                                    }
+                                })
+                                .catch(() => Alert.alert("Erreur", "Une erreur interne a été détectée"))
+                        }}
                     >
                         Oui, m'inscrire !
                     </Button>
