@@ -15,17 +15,17 @@ export default class APISession {
             }
             return axios.post(`${this.domain}/api/authentificate`, datas)
                 .then(req => resolve(req.data))
-                .catch(req => reject(req.data))
+                .catch(req => reject(req))
         })
     }
 
-    register(sex, diet, goal, weight, email) {
+    register(sex, sportFrequency, goal, weight, email) {
         return new Promise((resolve, reject) => {
             const datas = {
                 username: this.username, 
                 password: this.password,
+                sportfrequency: sportFrequency,
                 sex,
-                diet,
                 goal,
                 weight,
                 email
@@ -33,7 +33,7 @@ export default class APISession {
             
             return axios.post(`${this.domain}/api/register`, datas)
                 .then(req => resolve(req.data))
-                .catch(req => reject(req.data))
+                .catch(req => reject(req))
         })
     }
 }
