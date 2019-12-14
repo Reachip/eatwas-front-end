@@ -36,6 +36,10 @@ export default class AuthScreen extends Component {
             username: "",
             password: "",
         }
+
+        if (AsyncStorage.getItem("token")) {
+            this.props.navigation.navigate("Home")
+        }
     }
 
     render() {
@@ -60,20 +64,18 @@ export default class AuthScreen extends Component {
                 </TouchableOpacity>
                 <ButtonGroup style={styles.buttonGroup} status="success" size="large">
                     <Button onPress={() => {
-                        const s = new APISession("http://192.168.10.101:8080")
-                        s.authentificate(this.state.username, this.state.password)
+                        const s = new APISession("http://192.168.1.90:8080", this.state.username, this.state.password)
+                        s.authentificate()
                             .then(response => {
-                                if (response.code === 401) {
+                                if (response.code === 401)
                                     Alert.alert("Authentification", response.message)
-                                }
-                                    
                                 
                                 else {
                                     AsyncStorage.setItem("token", response.message)
                                     navigate("Home")
                                 }
                             })
-                            .catch(() => Alert.alert("Erreur interne", "Une erreur a été détecté sur notre service"))
+                            .catch(() => Alert.alert("Erreur", "Une erreur interne a été détecté"))
                     }}>Me connecter</Button>
                     <Button onPress={() => navigate("Register")}>M'inscrire</Button>
                 </ButtonGroup>
