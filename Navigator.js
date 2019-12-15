@@ -49,4 +49,4 @@ export const stackNavigator = createStackNavigator({
             title: `Projet EatWas`,
         }),   
     }
-});
+}, {headerMode: 'none'});
