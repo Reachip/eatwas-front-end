@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     },
 
     imageText: {
-        backgroundColor: "#00E096",
+        backgroundColor: "#008F72",
         paddingBottom: 12,
         paddingLeft: 10,
         paddingTop: 7,
@@ -27,7 +27,7 @@ const CardMenu = (props) => {
                 imageStyle={{borderRadius: 10}}
                 style={{flex: 1}}
             >
-                <Text category="h4" appearance="alternative" style={styles.imageText}>{props.title}</Text>
+                <Text category="h4" style={styles.imageText}>{props.title}</Text>
             </ImageBackground>
         </TouchableOpacity>
     );
