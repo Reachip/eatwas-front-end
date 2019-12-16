@@ -1,38 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "EatWas",
   "displayName": "EatWas"
-=======
-  "expo": {
-    "name": "Projet EatWas",
-    "slug": "eatwas",
-    "privacy": "public",
-    "sdkVersion": "35.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "entryPoint": "node_modules/expo/AppEntry.js"
-  },
-  "displayName": "Projet EatWas",
-  "name": "eatwas"
->>>>>>> 7b2772660153a17d70f5e9bdd492b088ee34b3b9
 }
