@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 yarn.lock
 ios/
 android/
@@ -62,3 +63,28 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+=======
+node_modules/**/*
+.expo/*
+.expo/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+.vscode/
+ios/
+ct/
+android/
+.expo-shared/
+*.orig.*
+web-build/
+web-report/
+.expo-shared/
+package-lock.json
+yarn.lock
+yarn-error.log
+# macOS
+.DS_Store
+>>>>>>> 7b2772660153a17d70f5e9bdd492b088ee34b3b9
